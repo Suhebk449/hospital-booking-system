@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Registration | CarePulse Suite</title>
+    <style>
+        body {
+            margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1920') no-repeat center center fixed;
+            background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh;
+        }
+        .reg-box { background: #ffffff; width: 400px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); overflow: hidden; }
+        .reg-header { background: #0d9488; color: white; padding: 25px; text-align: center; font-size: 20px; font-weight: bold; letter-spacing: 0.5px; }
+        .reg-body { padding: 25px; }
+        .form-group { margin-bottom: 15px; }
+        .form-control { width: 100%; padding: 11px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .form-control:focus { outline: none; border-color: #0d9488; }
+        .btn-reg { width: 100%; padding: 12px; background: #0d9488; border: none; color: white; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.3s; }
+        .btn-reg:hover { background: #0f766e; }
+        .footer-link { text-align: center; margin-top: 15px; font-size: 13px; }
+        .footer-link a { color: #0d9488; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="reg-box">
+    <div class="reg-header">CREATE NEW HEALTH PROFILE</div>
+    <div class="reg-body">
+        <form action="#" method="POST" onsubmit="alert('Profile Registered Safely! Navigating back to verification panel.'); window.location.href='user-login.html'; return false;">
+            <div class="form-group"><input type="text" class="form-control" placeholder="Full Name" required></div>
+            <div class="form-group"><input type="email" class="form-control" placeholder="Email Address" required></div>
+            <div class="form-group"><input type="password" class="form-control" placeholder="Create Secure Password" required></div>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Contact Mobile Number" required></div>
+            <button type="submit" class="btn-reg">🧬 Generate Health ID Profile</button>
+        </form>
+        <div class="footer-link">
+            <a href="user-login.html">Already have a medical file? Sign in here</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

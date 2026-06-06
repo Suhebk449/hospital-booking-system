@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Portal | CarePulse Sign In</title>
+    <style>
+        body {
+            margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1920') no-repeat center center fixed;
+            background-size: cover; display: flex; justify-content: center; align-items: center; height: 100vh;
+        }
+        .login-box { background: #ffffff; width: 380px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); overflow: hidden; }
+        .login-header { background: #0d9488; color: white; padding: 25px; text-align: center; font-size: 20px; font-weight: bold; letter-spacing: 0.5px; }
+        .login-body { padding: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #cbd5e1; background: #f8fafc; border-radius: 6px; box-sizing: border-box; font-size: 14px; transition: border 0.3s; }
+        .form-control:focus { outline: none; border-color: #0d9488; }
+        .btn-submit { width: 100%; padding: 12px; background: #0d9488; border: none; color: white; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #0f766e; }
+        .links { margin-top: 20px; text-align: center; font-size: 13px; }
+        .links a { color: #0d9488; text-decoration: none; display: block; margin-bottom: 8px; font-weight: 500; }
+        .links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    <div class="login-header">🏥 PATIENT PORTAL SIGN IN</div>
+    <div class="login-body">
+        <form action="#" method="POST" onsubmit="window.location.href='user-dashboard.html'; return false;">
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Enter Registered Email (e.g., patient@gmail.com)" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Enter Password" required>
+            </div>
+            <button type="submit" class="btn-submit">🔐 Secure Login</button>
+        </form>
+        <div class="links">
+            <a href="user-registration.html">New Patient? <strong>Create a Health ID Account</strong></a>
+            <a href="index.html" style="color: #64748b;">← Cancel and Back to Portal</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

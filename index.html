@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarePulse | Hospital Appointment Booking System</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8fafc; color: #334155; line-height: 1.6; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Navigation Bar */
+        nav.navbar { background-color: #ffffff; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; height: 80px; display: flex; align-items: center; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        nav .container { display: flex; justify-content: space-between; align-items: center; }
+        nav .navbar-brand { color: #0d9488; font-size: 24px; font-weight: bold; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        nav ul { list-style: none; display: flex; gap: 24px; }
+        nav ul li a { color: #64748b; text-decoration: none; font-size: 15px; font-weight: 500; transition: color 0.3s; }
+        nav ul li a:hover { color: #0d9488; }
+        .nav-btn { background-color: #0d9488; color: white !important; padding: 8px 16px; border-radius: 6px; }
+        .nav-btn:hover { background-color: #0f766e; }
+
+        /* Hero Section */
+        header.hero { 
+            margin-top: 80px;
+            background: linear-gradient(rgba(13, 148, 136, 0.85), rgba(15, 118, 110, 0.95)), url('https://images.unsplash.com/photo-1586773860418-d3b3de97e663?q=80&w=1200') no-repeat center center; 
+            background-size: cover; 
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        header.hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; letter-spacing: -0.5px; }
+        header.hero p { font-size: 1.25rem; max-width: 700px; margin: 0 auto 30px auto; color: #ccfbf1; }
+
+        /* Content Sections */
+        .section-title { text-align: center; margin: 60px 0 40px 0; }
+        .section-title h2 { font-size: 2rem; color: #1e293b; }
+        .section-title p { color: #64748b; margin-top: 8px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .service-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); text-align: center; border: 1px solid #f1f5f9; }
+        .service-card .icon { font-size: 40px; margin-bottom: 15px; color: #0d9488; }
+        .service-card h3 { margin-bottom: 12px; color: #1e293b; }
+        .service-card p { color: #64748b; font-size: 14px; }
+
+        /* Informative Showcase Images Section */
+        .showcase-section { display: flex; align-items: center; gap: 50px; background: white; padding: 40px; border-radius: 16px; margin-bottom: 60px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .showcase-img { flex: 1; max-width: 50%; border-radius: 12px; object-fit: cover; height: 350px; }
+        .showcase-text { flex: 1; }
+        .showcase-text h3 { font-size: 1.75rem; color: #1e293b; margin-bottom: 15px; }
+        .showcase-text ul { list-style: none; margin-top: 15px; }
+        .showcase-text ul li { margin-bottom: 10px; position: relative; padding-left: 25px; color: #475569; }
+        .showcase-text ul li::before { content: "✓"; position: absolute; left: 0; color: #0d9488; font-weight: bold; }
+
+        /* Contact & Developer Info Block */
+        .contact-section { background: white; padding: 40px; border-radius: 16px; margin-bottom: 60px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .row { display: flex; flex-wrap: wrap; margin: 0 -15px; }
+        .col-md-6 { flex: 0 0 50%; max-width: 50%; padding: 0 15px; }
+        
+        .info-list { list-style: none; }
+        .info-list li { margin-bottom: 15px; font-size: 15px; }
+        .info-list strong { color: #1e293b; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #475569; }
+        .form-control { width: 100%; padding: 10px 14px; font-size: 14px; border: 1px solid #cbd5e1; border-radius: 6px; background-color: #f8fafc; transition: border 0.3s; }
+        .form-control:focus { outline: none; border-color: #0d9488; }
+        .btn { display: inline-block; padding: 10px 20px; background-color: #0d9488; color: white; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.3s; }
+        .btn:hover { background-color: #0f766e; }
+
+        /* Footer */
+        footer { background-color: #0f172a; color: #94a3b8; padding: 30px 0; text-align: center; font-size: 14px; margin-top: 80px; }
+        footer strong { color: white; }
+
+        @media screen and (max-width: 768px) {
+            .col-md-6, .showcase-section { flex-direction: column; flex: 0 0 100%; max-width: 100%; }
+            .showcase-img { max-width: 100%; height: 250px; }
+            header.hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">🏥 CarePulse</a>
+            <ul>
+                <li><a href="user-login.html">Patient Login</a></li>
+                <li><a href="user-registration.html">Register</a></li>
+                <li><a href="admin-login.html" class="nav-btn">Doctor/Admin Area</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Your Health, Your Schedule</h1>
+            <p>Skip the waiting room lines. Book instant consultations with top verified healthcare specialists seamlessly online today.</p>
+            <a href="user-login.html" class="btn" style="padding: 14px 28px; font-size: 16px;">Book An Appointment Now</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="section-title">
+            <h2>Streamlined Healthcare Services</h2>
+            <p>Designed to provide swift medical allocation workflows efficiently</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon">👨‍⚕️</div>
+                <h3>Verified Specialists</h3>
+                <p>Connect with vetted clinicians and leading regional surgeons across multiple departments.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📅</div>
+                <h3>Real-Time Scheduling</h3>
+                <p>Select specific dates and open time-slots that align directly with your availability parameters.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">🔔</div>
+                <h3>Instant Alerts</h3>
+                <p>Receive instant notifications regarding booking changes, updates, and prescription confirmations.</p>
+            </div>
+        </div>
+
+        <div class="showcase-section">
+            <img class="showcase-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=800" alt="Hospital Management System Presentation Dashboard Illustration Layout UI Blueprint">
+            <div class="showcase-text">
+                <h3>Why Choose Our Online Booking Portal?</h3>
+                <p>Our platform closes the gap between patient requirements and dynamic medical staff allocations without manual processing slowdowns.</p>
+                <ul>
+                    <li>24/7 Access to specialized clinic scheduling</li>
+                    <li>Centralized dashboard records storing upcoming tracking history</li>
+                    <li>Integrated status update logs mapping real-time queue states</li>
+                    <li>Direct access routing across general physicians, pediatrics, and cardiology</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Hospital Support Desk</h4><br>
+                    <ul class="info-list">
+                        <li><strong>System Developer:</strong> Mr. Suheb Khan</li>
+                        <li><strong>Official Email:</strong> suhebk290@gmail.com</li>
+                        <li><strong>Helpline Number:</strong> 1800-419-1122 (Toll Free)</li>
+                        <li><strong>Campus Address:</strong> Aggarwal College Wing-1, Ballabgarh, Haryana</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Inquiry & Support Desk</h4><br>
+                    <form action="#" method="POST" onsubmit="alert('Thank you for your request. Our support desk will reach out shortly!'); return false;">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="msg">Message / Inquiry Details</label>
+                            <textarea class="form-control" id="msg" rows="3" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>System Designed & Maintained by <strong>Mr. Suheb Khan</strong> (suhebk290@gmail.com) &copy; 2026 CarePulse Suite. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
