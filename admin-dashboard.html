@@ -1,0 +1,68 @@
+<table id="adminQueueTable">
+    <thead>
+        <tr>
+            <th>Sequence ID</th>
+            <th>Patient Name</th>
+            <th>Department Specialty</th>
+            <th>Allocated Medical Officer</th>
+            <th>Visit Date</th>
+            <th>Time Slot</th> <th>Status State</th>
+            <th>Management Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>#APT-2026-1082</td>
+            <td>Sagar Yadav</td>
+            <td>Cardiology Unit</td>
+            <td>Dr. Sachin Garg</td>
+            <td>2026-06-12</td>
+            <td>10:30 AM</td> <td><span class="status-pill">Confirmed</span></td>
+            <td><span style="color:#64748b; font-style:italic;">System Default</span></td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    function loadAdminQueue() {
+        const appointmentsList = JSON.parse(localStorage.getItem('clinicAppointments')) || [];
+        const tableBody = document.getElementById('adminQueueTable').getElementsByTagName('tbody')[0];
+        const counterBadge = document.getElementById('apptCounter');
+        
+        // Adjust dashboard badge metrics dynamically
+        counterBadge.innerText = appointmentsList.length + 1;
+
+        // Render objects dynamically including the new 30-minute value
+        appointmentsList.forEach((appt, index) => {
+            const row = tableBody.insertRow();
+            row.innerHTML = `
+                <td>#${appt.apptNumber}</td>
+                <td><strong>${appt.name}</strong></td>
+                <td>${appt.dept}</td>
+                <td>${appt.doctor}</td>
+                <td>${appt.date}</td>
+                <td><strong style="color: #0d9488;">${appt.timeSlot || '10:00 AM'}</strong></td>
+                <td><span class="status-pill">${appt.status}</span></td>
+                <td><a class="action-link" onclick="deleteAppointment(${index})">Remove Case</a></td>
+            `;
+        });
+    }
+
+    function deleteAppointment(index) {
+        if(confirm("Are you sure you want to remove this medical appointment case file?")) {
+            let appointmentsList = JSON.parse(localStorage.getItem('clinicAppointments')) || [];
+            appointmentsList.splice(index, 1);
+            localStorage.setItem('clinicAppointments', JSON.stringify(appointmentsList));
+            location.reload();
+        }
+    }
+
+    function clearAllAppointments() {
+        if(confirm("Warning! This will clear the entire user-submitted simulation queue. Proceed?")) {
+            localStorage.removeItem('clinicAppointments');
+            location.reload();
+        }
+    }
+
+    window.onload = loadAdminQueue;
+</script>
